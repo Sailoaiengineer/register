@@ -159,5 +159,31 @@
    "seconds": 2.6,
    "render": "/home/user/register/blender-agent/last_render.png"
   }
+ },
+ "modern-villa-realistic": {
+  "tags": [
+   "architecture",
+   "house",
+   "villa",
+   "modern",
+   "realistic",
+   "dusk",
+   "curved-slab",
+   "glass",
+   "palms",
+   "pbr",
+   "nishita",
+   "dof",
+   "archviz"
+  ],
+  "source": "reference photo + Blender Guru donut tutorial transcript techniques",
+  "does": "Rebuilt modern villa: rounded-corner dark cantilever slabs (bmesh + bevel/boolean), procedural stucco/glass/pavers/wood/bark, scattered palm fronds, dusk Nishita sky, warm downlights, DOF, AgX",
+  "verified": {
+   "ok": true,
+   "contrast": 46.8,
+   "meshes": 271,
+   "seconds": 5.1,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
  }
 }
