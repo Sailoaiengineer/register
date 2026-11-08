@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """blender-agent CLI: ingest tutorials, verify bpy recipes by rendering, keep only what works.
 Needs: pip install bpy pillow ; for video URLs/files: node (npx mcp-video-analyzer) + yt-dlp."""
-import argparse, json, re, shutil, subprocess, sys, time
+import argparse, json, os, re, shutil, subprocess, sys, time
 from pathlib import Path
 
 HERE = Path(__file__).parent
@@ -36,8 +36,8 @@ def _render_worker(script, out):
         sc.collection.objects.link(lt)
         lt.rotation_euler = (0.8, 0.2, 0.6)
     sc.render.engine = "CYCLES"
-    sc.cycles.samples = 16
-    sc.render.resolution_x, sc.render.resolution_y = 320, 240
+    sc.cycles.samples = int(os.environ.get("BA_SAMPLES", 16))  # env raises quality for a closer look; default stays fast
+    sc.render.resolution_x, sc.render.resolution_y = int(os.environ.get("BA_W", 320)), int(os.environ.get("BA_H", 240))
     sc.render.filepath = out
     bpy.ops.render.render(write_still=True)
     print("OBJECTS", len([o for o in sc.objects if o.type == "MESH"]))

@@ -137,5 +137,27 @@
    "seconds": 2.7,
    "render": "/home/user/register/blender-agent/last_render.png"
   }
+ },
+ "modern-villa": {
+  "tags": [
+   "architecture",
+   "house",
+   "villa",
+   "modern",
+   "blockout",
+   "glass",
+   "cantilever",
+   "palms",
+   "dusk"
+  ],
+  "source": "user reference photo (modern white villa at dusk)",
+  "does": "Three-storey modern white villa with dark cantilever slabs, glass balcony/roof rail, entry glazing, boundary wall with gates, palms, dusk lighting",
+  "verified": {
+   "ok": true,
+   "contrast": 37.5,
+   "meshes": 68,
+   "seconds": 2.6,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
  }
 }
