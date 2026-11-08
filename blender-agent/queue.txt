@@ -1,0 +1,118 @@
+# Blender learning queue: videos found by web search (titles/dates only; none watched or verified).
+# Run on YOUR machine (YouTube blocks the cloud server):  python3 ba.py ingest-list queue.txt
+# If YouTube asks "confirm you're not a bot":  export YTDLP_COOKIES_FROM_BROWSER=chrome   (be logged in to YouTube in that browser, then retry)
+# Lines are `URL` or `URL | short-name`. Failures are written to failed.txt so you can rerun just those.
+# Order = priority for the agent (bpy scripting and exteriors/lighting first).
+
+# --- Python / bpy scripting (highest value: teaches the agent to write the scripts) ---
+https://www.youtube.com/watch?v=cyt0O7saU4Q | bpy-intro
+https://www.youtube.com/watch?v=F84y8nna1Cc | bpy-generate-models
+https://www.youtube.com/watch?v=w9t_675NV_8 | bpy-context-ops
+https://www.youtube.com/watch?v=zVtoEGQ7EA0 | bpy-data-types
+https://www.youtube.com/watch?v=ky2Mp5yDGDA | bpy-stairs
+https://www.youtube.com/watch?v=K0yb4sZ7B4g | bpy-simple-model
+https://www.youtube.com/watch?v=N15q6oAgxuE | bpy-keyframes
+https://www.youtube.com/watch?v=8mSSCQ7LGVo | bpy-addon-shader-library
+https://www.youtube.com/playlist?list=PL4ouCakVBtyqLJrLo42KbayTVbGB_Nreh | whats-bpy-series
+
+# --- Architecture / exteriors (for the villa) ---
+https://www.youtube.com/watch?v=AyALHo689ug | archviz-exterior-house
+https://www.youtube.com/watch?v=__eK30yNhBY | luxury-house-exterior
+https://www.youtube.com/watch?v=zz8UXrkZQMc | exterior-archviz
+https://www.youtube.com/watch?v=bg5_ryMH9mU | modern-exterior-render
+https://www.youtube.com/watch?v=MUEm39vVSc8 | exterior-cloudy-autumn
+https://www.youtube.com/watch?v=GguqL80o0Lw | easy-exterior-environment
+https://www.youtube.com/watch?v=Oz7vCW8INZU | archviz-exterior-cycles-33
+https://www.youtube.com/watch?v=Y3zCO4JM-Zs | photoreal-archviz
+https://www.youtube.com/watch?v=jw0RfaleNsU | exterior-villa-part3
+https://www.youtube.com/watch?v=SzYgg6TeDfo | modern-house-282
+
+# --- Lighting and photoreal rendering ---
+https://www.youtube.com/watch?v=jvBMh069zdU | interior-lighting-blender5
+https://www.youtube.com/watch?v=YZdos4Jb6IM | exterior-lighting-cycles
+https://www.youtube.com/watch?v=bRluQr0i5LU | lighting-cycles-eevee
+https://www.youtube.com/watch?v=x7QqlYXS7Zc | lighting-rendering-33
+https://www.youtube.com/watch?v=kxKUnQLn8cQ | interior-lighting-41
+https://www.youtube.com/watch?v=OMDbdEBqfg8 | four-steps-lighting
+https://www.youtube.com/watch?v=TGmsteKTBS0 | glass-material
+https://www.youtube.com/watch?v=OiVTmdXTnj4 | photoreal-lamp
+https://www.youtube.com/watch?v=B3KbV3lZC7k | product-viz
+https://www.youtube.com/watch?v=Eg-eVA4yHPc | product-viz-lighting
+https://www.youtube.com/watch?v=9kMDHCnmJtI | product-simple-lighting
+https://www.youtube.com/watch?v=c07FebfD2mk | product-lighting-realistic
+https://www.youtube.com/watch?v=vXe2Vsr0PEg | product-lighting-course-p3
+https://www.youtube.com/watch?v=4Uy2SzB-Kuk | three-point-lighting
+https://www.youtube.com/watch?v=KSSay7aEG04 | realistic-lighting
+https://www.youtube.com/watch?v=qDE4_v3bSDY | perfect-product-lighting
+https://www.youtube.com/watch?v=9JGejqy_w98 | cinematic-product-animation
+
+# --- Interiors ---
+https://www.youtube.com/watch?v=dHS4u9YaIDw | realistic-interior-new-technique
+https://www.youtube.com/watch?v=9pwtDYQbWpg | simple-realistic-interior
+https://www.youtube.com/watch?v=26Ic4RIWvKY | interior-2025
+https://www.youtube.com/watch?v=0EztoJcJVvc | realistic-interior-render
+https://www.youtube.com/watch?v=JbfMiogqeEI | house-interior
+https://www.youtube.com/watch?v=2-ArgVLA1gs | interior-design-course
+https://www.youtube.com/watch?v=aJ67huf1OMk | photorealism-cycles-livingroom
+https://www.youtube.com/watch?v=pGAslEathgQ | realistic-room
+
+# --- Materials / texturing / UV ---
+https://www.youtube.com/watch?v=5B244CYX1Tw | procedural-nodes-beginners
+https://www.youtube.com/watch?v=uET84dWaiWY | procedural-cast-stone
+https://www.youtube.com/watch?v=l3G2KOvXYiU | procedural-concrete
+https://www.youtube.com/watch?v=1DJ6bJda0j8 | procedural-wood-43
+https://www.youtube.com/watch?v=OTYn55AV-QM | procedural-tile
+https://www.youtube.com/watch?v=luZhWLOOytE | procedural-ocean
+https://www.youtube.com/watch?v=muvIS5_sXQo | fabric-material
+https://www.youtube.com/watch?v=exJ05ulu-Qc | procedural-paper
+https://www.youtube.com/watch?v=qa_1LjeWsJg | uv-unwrap-beginners
+https://www.youtube.com/watch?v=GYOvvmGjwn0 | model-unwrap-paint
+https://www.youtube.com/watch?v=EK6-tWUGljY | texture-mapping
+https://www.youtube.com/watch?v=2ibz7PAJutc | pbr-texturing
+
+# --- Geometry nodes, scatter, environments ---
+https://www.youtube.com/watch?v=QoqOTiE4vTY | geonodes-series-51
+https://www.youtube.com/watch?v=yAA-DuAtPKo | geonodes-51-part1
+https://www.youtube.com/watch?v=188IeRY-ch0 | geonodes-beginners
+https://www.youtube.com/watch?v=0QfxM_CHFNk | geonodes-procedural-primer
+https://www.youtube.com/watch?v=ETOXG3qdMKg | geonodes-concepts
+https://www.youtube.com/watch?v=tWvgHbZXCtA | geonodes-complete-beginners
+https://www.youtube.com/watch?v=mBxJHSrruNc | forest-in-seconds
+https://www.youtube.com/watch?v=kq7kI5XMB7E | forest-geonodes
+https://www.youtube.com/watch?v=QczIET_E2h0 | grass-geonodes
+https://www.youtube.com/watch?v=gHSxy76yz0s | scatter-nature
+https://www.youtube.com/watch?v=7-JvsnheaGg | scatter-geonodes
+https://www.youtube.com/watch?v=QMWn2XbsW6A | forest-landscape
+
+# --- Beginner courses (Blender 5) ---
+https://www.youtube.com/watch?v=kVcY7K-JA1Y | blender5-beginners-p1
+https://www.youtube.com/watch?v=J2OpaKlChI8 | blender5-beginners-p2-materials
+https://www.youtube.com/watch?v=As9BqdAu6VE | blender5-ground-up-1
+https://www.youtube.com/watch?v=pgOtAj59ugU | blender5-series-day1
+https://www.youtube.com/watch?v=4Kyva93hsOY | blender5-beginner-guide
+https://www.youtube.com/watch?v=d-8dh8DCDSc | blender5-first-environment
+https://www.youtube.com/playlist?list=PLn3ukorJv4vv9_e-htADGsPX9TMaQpHV8 | learn-blender-5-playlist
+
+# --- Rigging / animation ---
+https://www.youtube.com/watch?v=iEDTOp6nyW4 | rigify-full-guide
+https://www.youtube.com/watch?v=U1yL9qKlgKM | rig-animate-42
+https://www.youtube.com/watch?v=2nlMZx0vp6E | rigging-beginners
+https://www.youtube.com/watch?v=XKCUpiClJK8 | animate-character
+https://www.youtube.com/watch?v=g5iE7t-cbkI | rigging-techniques
+
+# --- Modeling / hard surface ---
+https://www.youtube.com/watch?v=nsTjnQ067sw | hardsurface-fundamentals
+https://www.youtube.com/watch?v=ZL02CDdAirA | hardsurface-modeling
+https://www.youtube.com/watch?v=ymmM9W66cCI | hardsurface-28
+https://www.youtube.com/watch?v=BD91HCKQtq0 | hardsurface-sculpting
+
+# --- Simulation and VFX ---
+https://www.youtube.com/watch?v=vQq0jFL1I-Y | fire-beginners
+https://www.youtube.com/watch?v=n8gGOch1e4I | fire-vfx-guide
+https://www.youtube.com/watch?v=dCeXllGveoU | smoke-fire-easy
+https://www.youtube.com/watch?v=RRU4MaqwBow | fire-smoke-42
+https://www.youtube.com/watch?v=6MJAcOBLHVw | realistic-smoke
+https://www.youtube.com/watch?v=t2WlJlXDNjA | green-screen-7min
+https://www.youtube.com/watch?v=mYYMTTVDI08 | green-screen-keying
+https://www.youtube.com/watch?v=bGSKjFz4NVg | screen-replacement
+https://www.youtube.com/watch?v=P6jlD3QdZTE | matchmoving-42

@@ -71,6 +71,20 @@ def cmd_ingest(a):
     print("saved", f)
 
 
+def cmd_ingest_list(a):
+    failed = []
+    for line in Path(a.file).read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"): continue
+        url, _, name = (x.strip() for x in line.partition("|"))
+        try:
+            cmd_ingest(argparse.Namespace(source=url, name=name or None))
+        except SystemExit as e:  # one blocked video must not stop the batch
+            failed.append(line); print("FAILED", url, str(e)[:120])
+    Path(HERE / "failed.txt").write_text("\n".join(failed) + "\n")
+    print(f"done, {len(failed)} failed -> failed.txt (rerun: ba.py ingest-list failed.txt)")
+
+
 def cmd_verify(a):
     r = verify(a.script)
     print(json.dumps(r, indent=1))
@@ -103,6 +117,7 @@ if __name__ == "__main__":
         _render_worker(sys.argv[2], sys.argv[3]); sys.exit()
     ap = argparse.ArgumentParser(); sp = ap.add_subparsers(required=True)
     s = sp.add_parser("ingest"); s.add_argument("source"); s.add_argument("--name"); s.set_defaults(f=cmd_ingest)
+    s = sp.add_parser("ingest-list"); s.add_argument("file"); s.set_defaults(f=cmd_ingest_list)
     s = sp.add_parser("verify"); s.add_argument("script"); s.set_defaults(f=cmd_verify)
     s = sp.add_parser("save"); s.add_argument("script"); s.add_argument("--name", required=True); s.add_argument("--tags", required=True)
     s.add_argument("--does", required=True); s.add_argument("--source", default="manual"); s.set_defaults(f=cmd_save)
