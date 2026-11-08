@@ -15,5 +15,63 @@
    "seconds": 1.8,
    "render": "/home/user/register/blender-agent/last_render.png"
   }
+ },
+ "atmosphere-volume-blockout": {
+  "tags": [
+   "environment",
+   "volume",
+   "fog",
+   "blockout",
+   "principled-volume",
+   "atmosphere"
+  ],
+  "source": "user-provided summary of Blender workflow video nRu41Wsfc8o, environment chapter",
+  "does": "Cube blockout scene with a large Principled Volume cube for depth/fog",
+  "verified": {
+   "ok": true,
+   "contrast": 32.0,
+   "meshes": 5,
+   "seconds": 3.0,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ },
+ "nla-blend-clips": {
+  "tags": [
+   "animation",
+   "nla",
+   "blend",
+   "strips",
+   "transition",
+   "non-destructive"
+  ],
+  "source": "same video, NLA chapter",
+  "does": "Two keyframed clips pushed to NLA tracks with blend_in transition",
+  "verified": {
+   "ok": true,
+   "contrast": 69.8,
+   "meshes": 2,
+   "seconds": 1.9,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ },
+ "child-of-weapon-ik": {
+  "tags": [
+   "rigging",
+   "constraint",
+   "child-of",
+   "ik",
+   "prop",
+   "weapon",
+   "armature"
+  ],
+  "source": "user-provided summary of Blender workflow video nRu41Wsfc8o, prop interaction chapter",
+  "does": "Weapon Child Of hand bone; IK chain reaches an empty target (asserted)",
+  "verified": {
+   "ok": true,
+   "contrast": 79.3,
+   "meshes": 2,
+   "seconds": 1.7,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
  }
 }
