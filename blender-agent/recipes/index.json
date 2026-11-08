@@ -1,0 +1,19 @@
+{
+ "glossy-sphere": {
+  "tags": [
+   "material",
+   "sphere",
+   "principled",
+   "basics"
+  ],
+  "source": "seed",
+  "does": "Glossy orange sphere on a ground plane using Principled BSDF",
+  "verified": {
+   "ok": true,
+   "contrast": 64.7,
+   "meshes": 2,
+   "seconds": 1.8,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ }
+}
