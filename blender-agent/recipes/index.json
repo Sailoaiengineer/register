@@ -73,5 +73,69 @@
    "seconds": 1.7,
    "render": "/home/user/register/blender-agent/last_render.png"
   }
+ },
+ "donut-icing-modifier-stack": {
+  "tags": [
+   "modeling",
+   "torus",
+   "icing",
+   "shrinkwrap",
+   "solidify",
+   "subsurf",
+   "subsurface",
+   "food"
+  ],
+  "source": "Blender Guru donut tutorial for Blender 5.0 (transcript pasted by user)",
+  "does": "Torus donut plus icing: duplicate, drop bottom half, ragged edge, Shrinkwrap>Solidify(offset 1)>Subsurf, SSS materials",
+  "verified": {
+   "ok": true,
+   "contrast": 11.5,
+   "meshes": 3,
+   "seconds": 4.6,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ },
+ "sprinkles-scatter-random-color": {
+  "tags": [
+   "scatter",
+   "sprinkles",
+   "instances",
+   "random",
+   "colorramp",
+   "object-info",
+   "distribution"
+  ],
+  "source": "Blender Guru donut tutorial for Blender 5.0 (transcript pasted by user)",
+  "does": "Surface scatter in Python (masked, min distance, random spin, 3 variants) with one shared material using Object Info Random into a constant ColorRamp",
+  "verified": {
+   "ok": true,
+   "contrast": 46.8,
+   "meshes": 254,
+   "seconds": 3.3,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ },
+ "sunlit-cafe-lighting-dof": {
+  "tags": [
+   "lighting",
+   "sun",
+   "sky",
+   "bounce",
+   "blockers",
+   "dof",
+   "eevee",
+   "agx",
+   "render",
+   "camera"
+  ],
+  "source": "Blender Guru donut tutorial for Blender 5.0 (transcript pasted by user)",
+  "does": "Sun+blue sky+bounce lights, blocker planes, depth of field on subject, Eevee ray tracing/shadow settings, Medium High Contrast look",
+  "verified": {
+   "ok": true,
+   "contrast": 21.2,
+   "meshes": 5,
+   "seconds": 2.7,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
  }
 }
