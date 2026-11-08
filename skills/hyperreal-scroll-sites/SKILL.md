@@ -42,6 +42,35 @@ The "3D" in most of these sites is not live 3D. It is **pre-rendered photoreal f
 5. **Choreograph text over footage** (this sells the effect): big uppercase headline, tight tracking, white on dark overlay (`linear-gradient` scrim, ~40%). Reveal copy at scroll thresholds, use `scrub` timelines with opacity+translateY, one beat per 100-150vh of scroll. Add a scroll cue and a minimal glass nav pill.
 6. **Fallbacks**: `prefers-reduced-motion` → show the final still, no pin. Provide `<noscript>` poster.
 
+## What MotionSites-style pages actually are (observed from public material only)
+Evidence: public preview images and clips, their own site (a Vite + React app), image hosts named after an AI generator, and templates offered for AI site builders. I have NOT seen their paid prompts or template code, so treat this as an informed reading, not a copy of their method.
+- **Realism is in the footage, not the code.** Heroes are ~10 s, 24 fps, H.264 loops of one calm, richly lit subject (a flower on water, a meadow, a train seen from above), made with AI image-to-video or stock footage.
+- **The page is thin**: full-bleed `<video autoplay muted loop playsinline>`, a dark scrim, huge uppercase type, a glass nav pill, one accent colour, a couple of scroll beats.
+- **The prompt is the product**: a long structured spec for an AI site builder (layout, type pairing, colours, motion). Write the same kind of spec, see "Spec anatomy".
+
+## Technique A2: video-backed hero (no JS)
+```html
+<video autoplay muted loop playsinline preload="auto" poster="frame0.webp" src="hero.mp4"></video>
+```
+Encode small: `ffmpeg -i in.mp4 -an -c:v libx264 -crf 26 -preset slow -vf scale=1920:-2 -movflags +faststart hero.mp4` (keep a 1280 version for phones). Always give a `poster` so the first paint is the hero, and let `prefers-reduced-motion` show only the poster. Make loops seamless by generating the clip with start frame = end frame.
+
+## Technique A3: scrub a video with scroll (fewer files than frame sequences)
+Re-encode so every frame is a keyframe, or seeking stutters: `ffmpeg -i in.mp4 -an -c:v libx264 -g 1 -crf 23 -vf scale=1280:-2 -movflags +faststart scrub.mp4` (WebM: `-c:v libvpx-vp9 -g 1 -b:v 0 -crf 34`). Files get big (all-intra), so keep clips short (5-10 s) and narrow.
+```js
+const v = document.querySelector('video'); let cur = 0, dur = 0;
+v.addEventListener('loadedmetadata', () => { dur = v.duration; v.pause(); });
+(function tick() {
+  const p = Math.min(1, Math.max(0, scrollY / (hero.offsetHeight - innerHeight)));
+  cur += (p * dur - cur) * 0.12;                                 // ease so it feels smooth
+  if (dur && !v.seeking && Math.abs(v.currentTime - cur) > 1/60) v.currentTime = cur; // one seek at a time
+  requestAnimationFrame(tick);
+})();
+```
+Tested: playhead went 0 -> 2.49 -> 4.99 s of a 5 s clip at 0/50/100% scroll. Pitfalls found: the server MUST support HTTP Range requests (Python's `http.server` does not, so `currentTime` snaps back to 0; `npx http-server`, nginx and every CDN are fine); iOS Safari is stricter, so prefer the frame sequence (technique A) when phones matter most.
+
+## Spec anatomy (what to hand an AI site builder, or follow yourself)
+1. Subject + mood in one line. 2. Hero asset: how it was generated, duration, loop or scrub. 3. Palette: background, text, one accent. 4. Type: display face + body face, sizes, tracking. 5. Layout of each scroll beat with the exact copy. 6. Motion: what moves, when, easing, durations. 7. Nav and CTA. 8. Performance and fallback rules (poster, reduced motion, mobile asset).
+
 ## Technique B: particle / point-cloud subject (e.g. "Kin" head)
 - Source: a GLB/scan, or a depth map of a portrait → sample N≈150k points (`MeshSurfaceSampler` or depth→xyz).
 - `THREE.Points` + `ShaderMaterial`: size attenuation, additive blending, per-point random for twinkle, soft round sprite.
