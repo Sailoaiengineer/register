@@ -1,0 +1,29 @@
+<!doctype html><body style="margin:0"><script type=importmap>{"imports":{"three":"./three.module.js"}}</script>
+<script type=module>
+import * as THREE from 'three';
+const W=1600,H=900;
+const r=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});r.setSize(W,H);r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.1;document.body.appendChild(r.domElement);
+const sc=new THREE.Scene();const fog=new THREE.Color(0x2a2f3a);sc.background=fog;sc.fog=new THREE.FogExp2(0x3a3d48,0.0042);
+// value-noise fbm
+const h=(x,y)=>{const s=Math.sin(x*127.1+y*311.7)*43758.5453;return s-Math.floor(s)};
+const n=(x,y)=>{const i=Math.floor(x),j=Math.floor(y),fx=x-i,fy=y-j,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);return h(i,j)*(1-u)*(1-v)+h(i+1,j)*u*(1-v)+h(i,j+1)*(1-u)*v+h(i+1,j+1)*u*v};
+const fbm=(x,y)=>{let a=1,f=1,s=0,t=0;for(let o=0;o<7;o++){s+=a*(1-Math.abs(2*n(x*f,y*f)-1));t+=a;a*=.5;f*=2}return s/t};
+const SZ=700,SEG=420;const g=new THREE.PlaneGeometry(SZ,SZ,SEG,SEG);g.rotateX(-Math.PI/2);
+const p=g.attributes.position,col=new Float32Array(p.count*3);
+for(let i=0;i<p.count;i++){const x=p.getX(i),z=p.getZ(i);
+ const valley=Math.min(1,Math.abs(x)/120); // flat valley along z axis, ridges on sides
+ let y=Math.pow(fbm(x*.006,z*.006),2.2)*210*(0.15+valley*1.1);
+ p.setY(i,y);const c=new THREE.Color().setHSL(.07,.08,.06+Math.min(.5,Math.max(0,(y-90)/160))*.55+n(x*.4,z*.4)*.05);col.set([c.r,c.g,c.b],i*3)}
+g.setAttribute('color',new THREE.BufferAttribute(col,3));g.computeVertexNormals();
+sc.add(new THREE.Mesh(g,new THREE.MeshStandardMaterial({vertexColors:true,roughness:.95})));
+const sun=new THREE.DirectionalLight(0xff9a4d,5);sun.position.set(-300,90,-300);sc.add(sun);
+sc.add(new THREE.HemisphereLight(0x6f86a8,0x1a1410,.7));
+const cam=new THREE.PerspectiveCamera(48,W/H,.5,1800);
+// sun disc glow on horizon
+const glow=new THREE.Mesh(new THREE.PlaneGeometry(900,500),new THREE.ShaderMaterial({transparent:true,depthWrite:false,fog:false,uniforms:{},vertexShader:'varying vec2 v;void main(){v=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec2 v;void main(){float d=distance(v,vec2(.5,.35));gl_FragColor=vec4(1.,.55,.2,1.)*pow(smoothstep(.55,0.,d),2.2)*.9;}'}));
+glow.position.set(-120,70,-700);sc.add(glow);
+window.draw=t=>{ // t in 0..1: low pass through valley, rising over the ridge
+ const e=t*t*(3-2*t);cam.position.set(Math.sin(t*2.2)*18+8,55+e*70,300-t*470);
+ cam.lookAt(-10+t*20,35+e*20,cam.position.z-160);r.render(sc,cam)};
+window.ready=true;
+</script>
