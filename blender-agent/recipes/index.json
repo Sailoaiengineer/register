@@ -185,5 +185,62 @@
    "seconds": 5.1,
    "render": "/home/user/register/blender-agent/last_render.png"
   }
+ },
+ "rigid-body-drop": {
+  "tags": [
+   "physics",
+   "rigid-body",
+   "gravity",
+   "collision",
+   "simulation",
+   "cache"
+  ],
+  "source": "Blender features overview video (transcript pasted by user)",
+  "does": "Active cubes fall onto passive floor; frames stepped sequentially; asserts they settled",
+  "verified": {
+   "ok": true,
+   "contrast": 42.2,
+   "meshes": 4,
+   "seconds": 3.3,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ },
+ "cloth-flag-wind": {
+  "tags": [
+   "physics",
+   "cloth",
+   "flag",
+   "wind",
+   "pin",
+   "vertex-group",
+   "simulation"
+  ],
+  "source": "Blender features overview video (transcript pasted by user)",
+  "does": "Pinned-edge cloth flag blown by Wind field; asserts free edge moved and pinned edge stayed",
+  "verified": {
+   "ok": true,
+   "contrast": 99.0,
+   "meshes": 3,
+   "seconds": 2.6,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
+ },
+ "driver-shape-key": {
+  "tags": [
+   "rigging",
+   "driver",
+   "shape-key",
+   "expression",
+   "animation"
+  ],
+  "source": "Blender features overview video (transcript pasted by user)",
+  "does": "Shape key value driven by an empty's height via a scripted driver; asserts the driven value",
+  "verified": {
+   "ok": true,
+   "contrast": 69.7,
+   "meshes": 2,
+   "seconds": 2.0,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
  }
 }
