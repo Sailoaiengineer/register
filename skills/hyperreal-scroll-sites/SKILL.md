@@ -25,15 +25,16 @@ The "3D" in most of these sites is not live 3D. It is **pre-rendered photoreal f
    ```bash
    ffmpeg -i hero.mp4 -vf "fps=24,scale=1600:-2" -c:v libwebp -quality 70 frames/f_%04d.webp
    ```
-   Budget: under ~6 MB total mobile; serve a 800px set via `matchMedia`.
+   Budget: aim under ~6 MB on mobile (120 noisy 1600px frames measured 8 MB, so lower quality/frame count or width for busy footage); serve a 800px set via `matchMedia`.
 4. **Bind to scroll** (Lenis + GSAP ScrollTrigger, canvas draw):
    ```js
    gsap.registerPlugin(ScrollTrigger);
    const lenis = new Lenis(); lenis.on('scroll', ScrollTrigger.update);
    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
    const N = 120, imgs = Array.from({length:N}, (_, i) => { const im = new Image(); im.src = `frames/f_${String(i+1).padStart(4,'0')}.webp`; return im; });
+   canvas.width = innerWidth * Math.min(devicePixelRatio, 2); canvas.height = innerHeight * Math.min(devicePixelRatio, 2);
    const ctx = canvas.getContext('2d'), st = { f: 0 };
-   const draw = () => { const im = imgs[Math.round(st.f)]; if (im?.complete) { /* cover-fit */ const r = Math.max(canvas.width/im.width, canvas.height/im.height); ctx.drawImage(im, (canvas.width-im.width*r)/2, (canvas.height-im.height*r)/2, im.width*r, im.height*r); } };
+   const draw = () => { const im = imgs[Math.round(st.f)]; if (im?.complete && im.naturalWidth) { /* cover-fit */ const r = Math.max(canvas.width/im.width, canvas.height/im.height); ctx.drawImage(im, (canvas.width-im.width*r)/2, (canvas.height-im.height*r)/2, im.width*r, im.height*r); } };
    gsap.to(st, { f: N-1, ease: 'none', onUpdate: draw,
      scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=400%', scrub: 0.5, pin: true } });
    ```
