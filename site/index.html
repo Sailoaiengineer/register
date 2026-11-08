@@ -60,7 +60,7 @@ const lenis=new Lenis();lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(
 const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#hero',start:'top top',end:'+=500%',scrub:.6,pin:true}});
 tl.to(st,{f:N-1,duration:1,onUpdate:draw},0);
 const beat=(s,a,b,fromY=40)=>tl.fromTo(s,{opacity:0,y:fromY},{opacity:1,y:0,duration:.05},a).to(s,{opacity:0,y:-fromY,duration:.05},b);
-tl.fromTo('.b1',{opacity:0,y:40},{opacity:1,y:0,duration:.04},0.0).to('.b1',{opacity:0,y:-40,duration:.06},.2);
+tl.to('.b1',{opacity:0,y:-40,duration:.06},.2);
 beat('.b2',.28,.46);beat('.b3',.52,.7);
 tl.fromTo('.b4',{opacity:0,y:40},{opacity:1,y:0,duration:.06},.82).to('.cue',{opacity:0,duration:.05},.05);
 }
