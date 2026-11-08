@@ -63,6 +63,7 @@ def cmd_ingest(a):
         data = {"source": src, "transcript": Path(src).read_text()}
     else:
         p = subprocess.run(["npx", "-y", "mcp-video-analyzer@latest", "analyze", src], capture_output=True, text=True)
+        if "{" not in p.stdout: sys.exit("ingest tool gave no JSON: " + (p.stderr or p.stdout)[-200:])
         data = json.loads(p.stdout[p.stdout.index("{"):])
         if not data.get("transcript") and not data.get("frames"):
             sys.exit("ingest got nothing (blocked or no captions): " + "; ".join(data.get("warnings", []))[:300])
@@ -79,7 +80,7 @@ def cmd_ingest_list(a):
         url, _, name = (x.strip() for x in line.partition("|"))
         try:
             cmd_ingest(argparse.Namespace(source=url, name=name or None))
-        except SystemExit as e:  # one blocked video must not stop the batch
+        except (SystemExit, Exception) as e:  # one bad video must not stop the batch
             failed.append(line); print("FAILED", url, str(e)[:120])
     Path(HERE / "failed.txt").write_text("\n".join(failed) + "\n")
     print(f"done, {len(failed)} failed -> failed.txt (rerun: ba.py ingest-list failed.txt)")
