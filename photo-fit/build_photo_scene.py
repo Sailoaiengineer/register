@@ -5,6 +5,10 @@ import math, sys, time
 import numpy as np, cv2, bpy
 from PIL import Image
 
+import os
+LATERAL = float(os.environ.get("PB_LATERAL", 1.6))   # camera slides from -LATERAL to +LATERAL metres
+PUSH = float(os.environ.get("PB_PUSH", 3.5))          # and dollies forward this many metres
+ZOOM = float(os.environ.get("PB_ZOOM", 1.45))         # crop-in factor: margin of photo kept around the frame so the move never shows its edge
 HFOV = 60.0                      # assumed: the photo has no EXIF; a wrong value only warps perspective slightly
 NEAR, FAR = 9.0, 140.0           # metres: nearest foreground tree and sky; the building lands ~25-35 m, a plausible villa distance
 out, N = sys.argv[1], int(sys.argv[2]); first = int(sys.argv[3]) if len(sys.argv) > 3 else 1; last = int(sys.argv[4]) if len(sys.argv) > 4 else N
@@ -45,11 +49,11 @@ bpy.ops.world.new(); sc.world = bpy.data.worlds[-1]; sc.world.use_nodes = True
 top = np.asarray(im, float)[:12].reshape(-1, 3).mean(0) / 255; lin = np.where(top <= 0.04045, top / 12.92, ((top + 0.055) / 1.055) ** 2.4)
 bg = sc.world.node_tree.nodes["Background"]; bg.inputs["Color"].default_value = (*lin, 1); bg.inputs["Strength"].default_value = 1.0   # sky colour beyond the photo's top edge
 cam = bpy.data.objects.new("Cam", bpy.data.cameras.new("Cam")); sc.collection.objects.link(cam); sc.camera = cam
-cam.data.sensor_fit = "HORIZONTAL"; cam.data.sensor_width = 36; cam.data.lens = f / W * 36 * 1.3   # zoom in 1.3x: leaves a margin of photo around the frame so the move never shows its edge
+cam.data.sensor_fit = "HORIZONTAL"; cam.data.sensor_width = 36; cam.data.lens = f / W * 36 * ZOOM   # zoom in: leaves a margin of photo around the frame so the move never shows its edge
 tgt = np.array([0.0, 28.0, 3.0])                                          # look-at point: the house, so the orbit pivots around it
 for i in range(first, last + 1):
     t = (i - 1) / max(N - 1, 1); e_ = t * t * (3 - 2 * t)
-    pos = np.array([(-1.0 + 2.0 * e_) if N > 1 else 0.0, 2.0 * e_ if N > 1 else 0.0, 0.0])   # slide right 2 m, push in 2 m
+    pos = np.array([(-LATERAL + 2 * LATERAL * e_) if N > 1 else 0.0, PUSH * e_ if N > 1 else 0.0, 0.0])
     cam.location = pos
     from mathutils import Vector
     aim = Vector((0, 1, 0)).lerp((Vector(tgt) - Vector(pos)).normalized(), 0.5)   # half-way between straight ahead and the house

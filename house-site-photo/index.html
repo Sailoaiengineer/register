@@ -53,7 +53,7 @@ footer{padding:36px max(6vw,16px);color:var(--mut);font-size:13px;display:flex;f
 <script src="vendor/gsap.min.js"></script><script src="vendor/ScrollTrigger.min.js"></script><script src="vendor/lenis.min.js"></script>
 <script>
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const N=60,SRC=window.FRAMES||Array.from({length:N},(_,i)=>`frames/f_${String(i+1).padStart(4,'0')}.webp`);
+const N=120,SRC=window.FRAMES||Array.from({length:N},(_,i)=>`frames/f_${String(i+1).padStart(4,'0')}.webp`);
 const imgs=SRC.map(s=>{const im=new Image();im.src=s;return im}),canvas=document.getElementById('c'),ctx=canvas.getContext('2d'),st={f:reduce?SRC.length-1:0};
 const size=()=>{const d=Math.min(devicePixelRatio||1,2),r=canvas.getBoundingClientRect();canvas.width=Math.round(r.width*d);canvas.height=Math.round(r.height*d);draw()};
 function draw(){const im=imgs[Math.round(st.f)];if(!im||!im.complete||!im.naturalWidth)return;ctx.drawImage(im,0,0,canvas.width,canvas.height)}
@@ -61,7 +61,7 @@ imgs.forEach(im=>im.onload=draw);addEventListener('resize',size);size();
 if(!reduce&&window.gsap&&window.Lenis){
 gsap.registerPlugin(ScrollTrigger);
 const lenis=new Lenis();lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
-const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#hero',start:'top top',end:'+=450%',scrub:.6,pin:true}});
+const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#hero',start:'top top',end:'+=900%',scrub:.6,pin:true}});
 tl.to(st,{f:SRC.length-1,duration:1,onUpdate:draw},0);
 const beat=(s,a,b)=>tl.fromTo(s,{opacity:0,y:40},{opacity:1,y:0,duration:.05},a).to(s,{opacity:0,y:-40,duration:.05},b);
 tl.to('.b1',{opacity:0,y:-40,duration:.06},.18).to('.cue',{opacity:0,duration:.05},.05);
