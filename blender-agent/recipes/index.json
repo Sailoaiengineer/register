@@ -242,5 +242,26 @@
    "seconds": 2.0,
    "render": "/home/user/register/blender-agent/last_render.png"
   }
+ },
+ "modern-villa-v3": {
+  "tags": [
+   "architecture",
+   "house",
+   "villa",
+   "dusk",
+   "calibrated",
+   "reference-look",
+   "cycles",
+   "agx"
+  ],
+  "source": "roble3/cc-blender-skill (reference-look-calibration, rendering, materials rules) + user reference photo",
+  "does": "Villa rebuilt with cc-blender-skill ideas: sky/exposure calibrated to the reference photo by measured colour stats, Cycles production settings, stronger interior glow",
+  "verified": {
+   "ok": true,
+   "contrast": 42.3,
+   "meshes": 271,
+   "seconds": 4.1,
+   "render": "/home/user/register/blender-agent/last_render.png"
+  }
  }
 }
